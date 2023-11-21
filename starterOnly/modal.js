@@ -1,12 +1,3 @@
-function editNav() {
-  let x = document.getElementById("myTopnav");
-  if (x.className === "topnav") {
-    x.className += " responsive";
-  } else {
-    x.className = "topnav";
-  }
-}
-
 // DOM Elements
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
@@ -20,7 +11,14 @@ modalBtn.forEach((btn) => btn.addEventListener("click", closeModal));
 function launchModal() {
   modalbg.style.display = "block";
 }
-
+function editNav() {
+  let x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
 function closeModal() {
   if (modalbg.style.display === "block") {
     document.querySelector(".close").addEventListener("click", function () {
@@ -38,20 +36,20 @@ function updateButtonColor() {
     submitBtn.style.backgroundColor = "#ff0000";
   }
 }
-// verrifie à chaque modification des imputs si le formulaire est valide, si oui change la couleur du bouton
+// vérifie à chaque modification des inputs si le formulaire est valide, si oui change la couleur du bouton
 const formFields = document.querySelectorAll('.text-control, #birthdate, #quantity, [name="location"], #checkbox1');
 formFields.forEach(field => {
   field.addEventListener('input', updateButtonColor);
 });
 function validate() {
-  let firstName = document.getElementById("first").value;
-  let lastName = document.getElementById("last").value;
-  let email = document.getElementById("email").value;
-  let birthDate = document.getElementById("birthdate").value;
-  let quantity = document.getElementById("quantity").value;
-  let locationRadios = document.getElementsByName("location");
+  const firstName = document.getElementById("first").value;
+  const lastName = document.getElementById("last").value;
+  const email = document.getElementById("email").value;
+  const birthDate = document.getElementById("birthdate").value;
+  const quantity = document.getElementById("quantity").value;
+  const locationRadios = document.getElementsByName("location");
   let locationSelected = false;
-  let checkbox1 = document.getElementById("checkbox1").checked;
+  const checkbox1 = document.getElementById("checkbox1").checked;
 
   let emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!emailRegex.test(email.trim())) {
@@ -78,9 +76,5 @@ function validate() {
   if (!locationSelected) {
     return false;
   }
-  if (!checkbox1) {
-    return false;
-  }
-
-  return true;
+  return checkbox1;
 }
