@@ -2,6 +2,8 @@
 const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
+const formFields = document.querySelectorAll('.text-control, #birthdate, #quantity, [name="location"], #checkbox1');
+
 
 // launch modal event
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -26,8 +28,7 @@ function closeModal() {
     });
   }
 }
-
-// Fonction pour mettre à jour la couleur du bouton si validate() du formulaire (true)
+// Fonction pour mettre à jour la couleur du bouton si validate() du formulaire
 function updateButtonColor() {
   const isValid = validate();
   const submitBtn = document.getElementById("submitBtn");
@@ -35,11 +36,44 @@ function updateButtonColor() {
   if (isValid) {
     submitBtn.style.backgroundColor = "#ff0000";
   }
+  else {
+    submitBtn.style.backgroundColor = "#e7e7e7";
+  }
 }
 // vérifie à chaque modification des inputs si le formulaire est valide, si oui change la couleur du bouton
-const formFields = document.querySelectorAll('.text-control, #birthdate, #quantity, [name="location"], #checkbox1');
 formFields.forEach(field => {
   field.addEventListener('input', updateButtonColor);
+});
+const errorMessages = {
+  first: "Veuillez entrer 2 caractères ou plus pour le champ du nom.",
+  last: "Veuillez entrer 2 caractères ou plus pour le champ du prénom.",
+  email: "Veuillez remplir une adresse e-mail valide.",
+  birthdate: "Veuillez sélectionner une date de naissance.",
+  quantity: "Vous devez choisir une option.",
+  location: "Vous devez choisir une option.",
+  checkbox1: "Vous devez vérifier que vous acceptez les termes et conditions."
+};
+function updateValidationMessages() {
+  formFields.forEach(field => {
+    const container = field.closest(".formData");
+    const fieldName = field.id;
+    const errorDiv = container.querySelector('.error-message');
+    // Supprimer les messages existants
+    errorDiv?.remove();
+
+    if (field.value.trim() === "") {
+      container.setAttribute("data-error", errorMessages[fieldName]);
+    } else {
+      container.removeAttribute("data-error");
+      container.setAttribute("data-error-visible", "true");
+    }
+  });
+}
+formFields.forEach(field => {
+  field.addEventListener('input', () => {
+    updateButtonColor();
+    updateValidationMessages();
+  });
 });
 function validate() {
   const firstName = document.getElementById("first").value;
@@ -62,6 +96,13 @@ function validate() {
     return false;
   }
   if (birthDate.trim() === "") {
+    return false;
+  }
+  const birthDateObj = new Date(birthDate);
+  const eighteenYearsAgo = new Date();
+  eighteenYearsAgo.setFullYear(eighteenYearsAgo.getFullYear() - 18);
+
+  if (birthDateObj > eighteenYearsAgo) {
     return false;
   }
   if (quantity.trim() === "" || isNaN(quantity)) {
