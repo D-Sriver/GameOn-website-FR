@@ -4,46 +4,6 @@ const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const formFields = document.querySelectorAll('.text-control, #birthdate, #quantity, [name="location"], #checkbox1');
 
-
-// launch modal event
-modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
-modalBtn.forEach((btn) => btn.addEventListener("click", closeModal));
-
-// launch modal form
-function launchModal() {
-  modalbg.style.display = "block";
-}
-function editNav() {
-  let x = document.getElementById("myTopnav");
-  if (x.className === "topnav") {
-    x.className += " responsive";
-  } else {
-    x.className = "topnav";
-  }
-}
-function closeModal() {
-  if (modalbg.style.display === "block") {
-    document.querySelector(".close").addEventListener("click", function () {
-      modalbg.style.display = "none";
-    });
-  }
-}
-// Fonction pour mettre à jour la couleur du bouton si validate() du formulaire
-function updateButtonColor() {
-  const isValid = validate();
-  const submitBtn = document.getElementById("submitBtn");
-
-  if (isValid) {
-    submitBtn.style.backgroundColor = "#ff0000";
-  }
-  else {
-    submitBtn.style.backgroundColor = "#e7e7e7";
-  }
-}
-// vérifie à chaque modification des inputs si le formulaire est valide, si oui change la couleur du bouton
-formFields.forEach(field => {
-  field.addEventListener('input', updateButtonColor);
-});
 const errorMessages = {
   first: "Veuillez entrer 2 caractères ou plus pour le champ du nom.",
   last: "Veuillez entrer 2 caractères ou plus pour le champ du prénom.",
@@ -53,6 +13,39 @@ const errorMessages = {
   location: "Vous devez choisir une option.",
   checkbox1: "Vous devez vérifier que vous acceptez les termes et conditions."
 };
+// Event Listeners
+modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
+modalBtn.forEach((btn) => btn.addEventListener("click", closeModal));
+formFields.forEach(field => field.addEventListener('input', updateButtonColor));
+formFields.forEach(field => field.addEventListener('input', () => {
+  updateButtonColor();
+  updateValidationMessages();
+}));
+
+// Functions
+function launchModal() {
+  modalbg.style.display = "block";
+}
+
+function closeModal() {
+  if (modalbg.style.display === "block") {
+    document.querySelector(".close").addEventListener("click", function () {
+      modalbg.style.display = "none";
+    });
+  }
+}
+
+function updateButtonColor() {
+  const isValid = validate();
+  const submitBtn = document.getElementById("submitBtn");
+
+  if (isValid) {
+    submitBtn.style.backgroundColor = "#ff0000";
+  } else {
+    submitBtn.style.backgroundColor = "#e7e7e7";
+  }
+}
+
 function updateValidationMessages() {
   formFields.forEach(field => {
     const container = field.closest(".formData");
@@ -69,12 +62,7 @@ function updateValidationMessages() {
     }
   });
 }
-formFields.forEach(field => {
-  field.addEventListener('input', () => {
-    updateButtonColor();
-    updateValidationMessages();
-  });
-});
+
 function validate() {
   const firstName = document.getElementById("first").value;
   const lastName = document.getElementById("last").value;
@@ -89,15 +77,19 @@ function validate() {
   if (!emailRegex.test(email.trim())) {
     return false;
   }
+
   if (firstName.trim() === "") {
     return false;
   }
+
   if (lastName.trim() === "") {
     return false;
   }
+
   if (birthDate.trim() === "") {
     return false;
   }
+
   const birthDateObj = new Date(birthDate);
   const eighteenYearsAgo = new Date();
   eighteenYearsAgo.setFullYear(eighteenYearsAgo.getFullYear() - 18);
@@ -105,17 +97,21 @@ function validate() {
   if (birthDateObj > eighteenYearsAgo) {
     return false;
   }
+
   if (quantity.trim() === "" || isNaN(quantity)) {
     return false;
   }
+
   for (let i = 0; i < locationRadios.length; i++) {
     if (locationRadios[i].checked) {
       locationSelected = true;
       break;
     }
   }
+
   if (!locationSelected) {
     return false;
   }
+
   return checkbox1;
 }
