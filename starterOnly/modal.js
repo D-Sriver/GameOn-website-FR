@@ -27,6 +27,15 @@ function launchModal() {
   modalbg.style.display = "block";
 }
 
+function editNav() {
+  var x = document.getElementById("myTopnav");
+  if (x.className === "topnav") {
+    x.className += " responsive";
+  } else {
+    x.className = "topnav";
+  }
+}
+
 function closeModal() {
   if (modalbg.style.display === "block") {
     document.querySelector(".close").addEventListener("click", function () {
