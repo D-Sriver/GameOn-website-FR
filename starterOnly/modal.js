@@ -19,18 +19,10 @@ modalBtn.forEach((btn) => btn.addEventListener("click", closeModal));
 formFields.forEach(field => field.addEventListener('input', updateButtonColor));
 formFields.forEach(field => field.addEventListener('input', () => {
   updateButtonColor();
+  updateValidationMessages();
 }));
 
 // Functions
-function editNav() {
-  var x = document.getElementById("myTopnav");
-  if (x.className === "topnav") {
-    x.className += " responsive";
-  } else {
-    x.className = "topnav";
-  }
-}
-
 function launchModal() {
   modalbg.style.display = "block";
 }
@@ -72,9 +64,9 @@ function updateValidationMessages() {
 }
 
 function validate() {
-  const firstName = document.getElementById("first").value.trim();
-  const lastName = document.getElementById("last").value.trim();
-  const email = document.getElementById("email").value.trim();
+  const firstName = document.getElementById("first").value;
+  const lastName = document.getElementById("last").value;
+  const email = document.getElementById("email").value;
   const birthDate = document.getElementById("birthdate").value;
   const quantity = document.getElementById("quantity").value;
   const locationRadios = document.getElementsByName("location");
@@ -86,15 +78,15 @@ function validate() {
     return false;
   }
 
-  if (firstName === "") {
+  if (firstName.trim() === "") {
     return false;
   }
 
-  if (lastName === "") {
+  if (lastName.trim() === "") {
     return false;
   }
 
-  if (birthDate === "") {
+  if (birthDate.trim() === "") {
     return false;
   }
 
@@ -106,7 +98,7 @@ function validate() {
     return false;
   }
 
-  if (quantity === "" || isNaN(quantity)) {
+  if (quantity.trim() === "" || isNaN(quantity)) {
     return false;
   }
 
