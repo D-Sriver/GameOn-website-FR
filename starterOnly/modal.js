@@ -19,7 +19,6 @@ modalBtn.forEach((btn) => btn.addEventListener("click", closeModal));
 formFields.forEach(field => field.addEventListener('input', updateButtonColor));
 formFields.forEach(field => field.addEventListener('input', () => {
   updateButtonColor();
-  updateValidationMessages();
 }));
 
 // Functions
