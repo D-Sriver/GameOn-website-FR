@@ -92,7 +92,14 @@ function submitForm(event) {
 	//reset le formulaire
 	resetForm();
 }
-
+function editNav() {
+	var x = document.getElementById("myTopnav");
+	if (x.className === "topnav") {
+		x.className += " responsive";
+	} else {
+		x.className = "topnav";
+	}
+}
 // Fonction qui vérifie les champs du formulaire et affiche les messages d'erreur
 function updateValidationMessages() {
   formFields.forEach(field => {
