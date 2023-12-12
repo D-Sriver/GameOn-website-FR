@@ -115,22 +115,30 @@ function validate() {
 		errors.push("email");
 	}
 	if (!validateBirthdate()) {
+		errors.push("birthdate");
 	}
 	if (!validateQuantity()) {
+		errors.push("quantity");
 	}
 	if (!validateLocation()) {
+		errors.push("location1");
 	}
 	if (!validateCheckbox()) {
+		errors.push("checkbox1");
 	}
 
 	// Afficher tous les messages d'erreur en même temps
-	errors.forEach(error => {
-		document.getElementById(error).closest("div").setAttribute("data-error-visible", true);
+	formData.forEach(element => {
+		const fieldName = element.querySelector('input, select, textarea').id;
+		if (errors.includes(fieldName)) {
+			element.setAttribute("data-error-visible", true);
+		} else {
+			element.setAttribute("data-error-visible", false);
+		}
 	});
 
 	return errors.length === 0; // Retourne vrai s'il n'y a aucune erreur
 }
-
 // Fonction pour valider la date de naissance
 function validateBirthdate() {
 	let Anniv = new Date(birthdate.value);
@@ -194,4 +202,20 @@ function ValidationModal() {
 	texteRemerciement.style.fontSize = "30px";
 	texteRemerciement.style.textAlign = "center";
 	submitBouton.value = "Fermer";
+	tableData();
+
+}
+
+function tableData() {
+	const data = {
+		First: first.value,
+		Last: last.value,
+		Email: email.value,
+		Birthdate: birthdate.value,
+		Quantity: quantity.value,
+		Location: document.querySelector('input[name="location"]:checked').value,
+		Checkbox: checkbox1.checked,
+	};
+
+	console.table(data);
 }
