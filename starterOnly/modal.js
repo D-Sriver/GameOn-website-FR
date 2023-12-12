@@ -105,10 +105,10 @@ function validate() {
 
 	const errors = [];
 
-	if (!validateField(first.value, 2, "Veuillez entrer un prénom valide (sans chiffres).", first, nameRegex)) {
+	if (!validateField(first.value, 2, "Veuillez entrer 2 caractères ou plus pour le champ du Prénom", first, nameRegex)) {
 		errors.push("first");
 	}
-	if (!validateField(last.value, 2, "Veuillez entrer un nom valide (sans chiffres).", last, nameRegex)) {
+	if (!validateField(last.value, 2, "euillez entrer 2 caractères ou plus pour le champ du nom", last, nameRegex)) {
 		errors.push("last");
 	}
 	if (!validateField(email.value, 1, "Veuillez entrer un e-mail valide.", email, emailRegex)) {
