@@ -15,7 +15,7 @@ const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const closeBtn = document.querySelector(".close");
 const submitBouton = document.querySelector(".btn-submit");
-//Données du formulaire
+// Création de constantes pour les champs du formulaire
 const first = document.getElementById("first");
 const last = document.getElementById("last");
 const email = document.getElementById("email");
@@ -29,14 +29,13 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 closeBtn.addEventListener("click", closeModal);
 submitBouton.addEventListener("click", SubmitForm);
 
-// Fonction pour lancer la modal
+// Fonction pour lancer la modale
 function launchModal() {
 	// Affiche la modal
 	modalbg.style.display = "block";
 	displayElements();
 }
-
-// Fonction pour fermer la modal
+// Fonction pour fermer la modale
 function closeModal() {
 	// Ferme la modal
 	modalbg.style.display = "none";
@@ -56,8 +55,7 @@ function SubmitForm(event) {
 		}
 	}
 }
-
-// Fonction pour vérifier les formData du formulaire
+//fonction qui sert à afficher les elements du formulaire
 function displayElements() {
 	formData.forEach(element => {
 		element.style.display = "block";
@@ -66,7 +64,7 @@ function displayElements() {
 
 // Fonction pour réinitialiser le formulaire
 function resetForm() {
-	// Réinitialisation des valeurs des champs
+	// Réinitialisation des valeurs des champs à null
 	first.value = "";
 	last.value = "";
 	email.value = "";
@@ -104,7 +102,7 @@ function validate() {
 	const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 	const errors = [];
-
+// si les champs validateField sont faux
 	if (!validateField(first.value, 2, "Veuillez entrer 2 caractères ou plus pour le champ du prénom.", first, nameRegex)) {
 		errors.push("first");
 	}
@@ -141,9 +139,9 @@ function validate() {
 }
 // Fonction pour valider la date de naissance
 function validateBirthdate() {
-	let Anniv = new Date(birthdate.value);
-	let YearAnniv = Anniv.getFullYear();
-	if (YearAnniv > 1900 && YearAnniv < 2023) {
+	let Birthdate = new Date(birthdate.value);
+	let YearBirthdate = Birthdate.getFullYear();
+	if (YearBirthdate > 1900 && YearBirthdate < 2023) {
 		birthdate.closest("div").setAttribute("data-error-visible", false);
 		return true;
 	} else {
@@ -205,7 +203,7 @@ function ValidationModal() {
 	tableData();
 
 }
-
+//Crée un tableau avec les données du formulaire
 function tableData() {
 	const data = {
 		First: first.value,
@@ -216,6 +214,6 @@ function tableData() {
 		Location: document.querySelector('input[name="location"]:checked').value,
 		Checkbox: checkbox1.checked,
 	};
-
+//les affiches dans la console
 	console.table(data);
 }
