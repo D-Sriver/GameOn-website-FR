@@ -1,6 +1,6 @@
 // Fonction pour basculer la topnav en topnav responsive
 function editNav() {
-	var x = document.getElementById("myTopnav");
+	let x = document.getElementById("myTopnav");
 	if (x.className === "topnav") {
 		x.className += " responsive";
 	} else {
@@ -44,13 +44,17 @@ function closeModal() {
 }
 
 // Fonction pour soumettre le formulaire au clic du bouton
-function SubmitForm() {
+function SubmitForm(event) {
+	event.preventDefault(); // Empêche le rechargement de la page
 	if (submitBouton.value === "Fermer") {
 		closeModal();
 		resetForm();
 	} else {
 		if (validate()) {
+			ValidationModal();
 		}
+		// Affiche les valeurs du formulaire dans la console
+		consoleTable();
 	}
 }
 
@@ -191,4 +195,5 @@ function ValidationModal() {
 	texteRemerciement.style.fontSize = "30px";
 	texteRemerciement.style.textAlign = "center";
 	submitBouton.value = "Fermer";
+	console.log("inscription valide");
 }
