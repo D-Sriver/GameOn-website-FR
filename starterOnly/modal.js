@@ -52,9 +52,8 @@ function SubmitForm(event) {
 	} else {
 		if (validate()) {
 			ValidationModal();
+			consoleTable();		// Affiche les valeurs du formulaire dans la console
 		}
-		// Affiche les valeurs du formulaire dans la console
-		consoleTable();
 	}
 }
 
@@ -196,4 +195,16 @@ function ValidationModal() {
 	texteRemerciement.style.textAlign = "center";
 	submitBouton.value = "Fermer";
 	console.log("inscription valide");
+}
+
+function consoleTable() {
+	console.table({
+		Prénom: first.value,
+		Nom: last.value,
+		Email: email.value,
+		Date_de_naissance: birthdate.value,
+		Quantité_de_tournois: quantity.value,
+		Ville: document.querySelector('input[name="location"]:checked').value,
+		Conditions_d_utilisation: checkbox1.checked,
+	});
 }
