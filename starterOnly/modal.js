@@ -14,6 +14,8 @@ const modalbg = document.querySelector(".bground");
 const modalBtn = document.querySelectorAll(".modal-btn");
 const formData = document.querySelectorAll(".formData");
 const closeBtn = document.querySelector(".close");
+const submitBouton = document.querySelector(".btn-submit");
+//Données du formulaire
 const first = document.getElementById("first");
 const last = document.getElementById("last");
 const email = document.getElementById("email");
@@ -21,7 +23,6 @@ const birthdate = document.getElementById("birthdate");
 const quantity = document.getElementById("quantity");
 const locationsErreur = document.getElementById("location1");
 const checkbox1 = document.getElementById("checkbox1");
-const submitBouton = document.querySelector(".btn-submit");
 
 // Ajout d'EventListener aux boutons
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
@@ -52,7 +53,6 @@ function SubmitForm(event) {
 	} else {
 		if (validate()) {
 			ValidationModal();
-			consoleTable();		// Affiche les valeurs du formulaire dans la console
 		}
 	}
 }
@@ -105,13 +105,13 @@ function validate() {
 
 	const errors = [];
 
-	if (!validateField(first.value, 2, "Veuillez entrer 2 caractères ou plus pour le champ du Prénom", first, nameRegex)) {
+	if (!validateField(first.value, 2, "Veuillez entrer 2 caractères ou plus pour le champ du prénom.", first, nameRegex)) {
 		errors.push("first");
 	}
-	if (!validateField(last.value, 2, "euillez entrer 2 caractères ou plus pour le champ du nom", last, nameRegex)) {
+	if (!validateField(last.value, 2, "Veuillez entrer 2 caractères ou plus pour le champ du nom.", last, nameRegex)) {
 		errors.push("last");
 	}
-	if (!validateField(email.value, 1, "Veuillez entrer un e-mail valide.", email, emailRegex)) {
+	if (!validateField(email.value, 2, "Veuillez entrer un e-mail valide.", email, emailRegex)) {
 		errors.push("email");
 	}
 	if (!validateBirthdate()) {
@@ -194,17 +194,4 @@ function ValidationModal() {
 	texteRemerciement.style.fontSize = "30px";
 	texteRemerciement.style.textAlign = "center";
 	submitBouton.value = "Fermer";
-	console.log("inscription valide");
-}
-
-function consoleTable() {
-	console.table({
-		Prénom: first.value,
-		Nom: last.value,
-		Email: email.value,
-		Date_de_naissance: birthdate.value,
-		Quantité_de_tournois: quantity.value,
-		Ville: document.querySelector('input[name="location"]:checked').value,
-		Conditions_d_utilisation: checkbox1.checked,
-	});
 }
