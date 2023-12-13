@@ -167,7 +167,9 @@ function validateQuantity() {
 // Fonction pour valider le radio bouton
 function validateLocation() {
 	let AllLocations = document.querySelectorAll('input[name="location"]');
+	// Vérifie si au moins un radio bouton est coché
 	let OneLocation = Array.prototype.slice.call(AllLocations).some((x) => x.checked);
+	// Si aucun radio bouton n'est coché, affiche un message d'erreur
 	if (OneLocation === false) {
 		locationsErreur.closest("div").setAttribute("data-error-visible", true);
 		locationsErreur.closest("div").setAttribute("data-error", "Vous devez choisir une option");
@@ -200,20 +202,20 @@ function ValidationModal() {
 	texteRemerciement.style.fontSize = "30px";
 	texteRemerciement.style.textAlign = "center";
 	submitBouton.value = "Fermer";
-	tableData();
-
+	tableData(); // Appelle la fonction pour créer le tableau dans la console
 }
 //Crée un tableau avec les données du formulaire
 function tableData() {
 	const data = {
-		First: first.value,
-		Last: last.value,
-		Email: email.value,
-		Birthdate: birthdate.value,
-		Quantity: quantity.value,
-		Location: document.querySelector('input[name="location"]:checked').value,
-		Checkbox: checkbox1.checked,
+		"Prénom": first.value,
+		"Nom": last.value,
+		"Email": email.value,
+		"Date d'anniversaire": birthdate.value,
+		"Quantité de tournois": quantity.value,
+		"Localisation": document.querySelector('input[name="location"]:checked').value,
+		"Conditions d'utilisation": checkbox1.checked ? 'Checked' : 'Not Checked',
 	};
-//les affiches dans la console
+	// Afficher dans la console
 	console.table(data);
 }
+
