@@ -90,7 +90,7 @@ function resetForm() {
     submitBouton.value = "C'est parti";
 }
 
-// Fonction pour valider le champ du formulaire avec regex
+// Fonction pour valider le champ du formulaire avec regex (plein de paramètres)
 function validateField(value, minLength, errorMessage, element, regex) {
     // si la valeur du champ est inférieur à la longueur minimum ou si la valeur du champ ne correspond pas à la regex
     if (value.length < minLength || !regex.test(value)) {
@@ -142,7 +142,7 @@ function validate() {
     // Si le champ du radio bouton ne passe pas la validation (ne correspondant pas à la fonction validateLocation),
     // alors ajoute l'identifiant du champ du radio bouton au tableau des erreurs.
     if (!validateLocation()) {
-        errors.push("location1");
+		errors.push("location1");
     }
     // Si le champ des conditions d'utilisation ne passe pas la validation (ne correspondant pas à la fonction validateCheckbox),
     // alors ajoute l'identifiant du champ des conditions d'utilisation au tableau des erreurs.
@@ -257,4 +257,3 @@ function tableData() {
     // Afficher dans la console
     console.table(data);
 }
-

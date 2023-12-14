@@ -2,6 +2,10 @@
 
 Bienvenue dans le projet de réservation pour le **Marathon national de jeux vidéos**, un site d'inscription au tournoi GameOn. Ce projet offre une interface conviviale permettant aux passionnés de jeux vidéo de s'inscrire pour participer à l'évènement.
 
+Projet réalisé dans le cadre de la formation Développeur Front-End d'Openclassrooms.
+
+Version en ligne : https://d-sriver.github.io/GameOn-website-FR/starterOnly/
+
 ## Table des matières
 
 - [Introduction](#introduction)
