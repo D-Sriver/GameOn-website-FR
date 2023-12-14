@@ -205,7 +205,7 @@ function validateQuantity() {
 // Fonction pour valider le radio bouton
 function validateLocation() {
     let AllLocations = document.querySelectorAll('input[name="location"]');
-    // Vérifie si au moins un radio bouton est coché
+    // Vérifie si au moins un radio bouton est coché depuis le tableau AllLocations
     let OneLocation = Array.prototype.slice.call(AllLocations).some((x) => x.checked);
     // Si aucun radio bouton n'est coché, affiche un message d'erreur
     if (OneLocation === false) {
@@ -236,10 +236,11 @@ function ValidationModal() {
         formData[i].style.display = "none";
     }
     texteRemerciement.textContent = "Merci pour votre inscription !";
-    texteRemerciement.style.padding = "30% 25px";
+    texteRemerciement.style.padding = "80% 25px";
     texteRemerciement.style.fontSize = "30px";
     texteRemerciement.style.textAlign = "center";
     submitBouton.value = "Fermer";
+    submitBouton.style.backgroundColor = "#EA0126";
     tableData(); // Appelle la fonction pour créer le tableau dans la console
 }
 
