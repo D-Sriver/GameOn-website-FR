@@ -126,7 +126,7 @@ function validate() {
     }
     // Si le champ de l'e-mail ne passe pas la validation (longueur inférieure à 2 ou ne correspondant pas à la regex),
     // alors ajoute l'identifiant du champ de l'e-mail au tableau des erreurs.
-    if (!validateField(email.value, 2, "Veuillez entrer un e-mail valide.", email, emailRegex)) {
+    if (!validateField(email.value, "Veuillez entrer un e-mail valide.", email, emailRegex)) {
         errors.push("email");
     }
     // Si le champ de la date de naissance ne passe pas la validation (ne correspondant pas à la fonction validateBirthdate),
@@ -206,7 +206,7 @@ function validateQuantity() {
 function validateLocation() {
     let AllLocations = document.querySelectorAll('input[name="location"]');
     // Vérifie si au moins un radio bouton est coché depuis le tableau AllLocations
-    let OneLocation = Array.prototype.slice.call(AllLocations).some((x) => x.checked);
+    let OneLocation =  AllLocations.filter(location => location.checked).length > 0;
     // Si aucun radio bouton n'est coché, affiche un message d'erreur
     if (OneLocation === false) {
         locationsErreur.closest("div").setAttribute("data-error-visible", true);
