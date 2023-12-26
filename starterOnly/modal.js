@@ -142,7 +142,7 @@ function validate() {
     // Si le champ du radio bouton ne passe pas la validation (ne correspondant pas à la fonction validateLocation),
     // alors ajoute l'identifiant du champ du radio bouton au tableau des erreurs.
     if (!validateLocation()) {
-		errors.push("location1");
+        errors.push("location1");
     }
     // Si le champ des conditions d'utilisation ne passe pas la validation (ne correspondant pas à la fonction validateCheckbox),
     // alors ajoute l'identifiant du champ des conditions d'utilisation au tableau des erreurs.
