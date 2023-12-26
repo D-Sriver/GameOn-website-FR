@@ -50,8 +50,8 @@ function displayElements() {
     });
 }
 
-// Fonction pour fermer la modale
-// Elle fait passer le display de la modale à none et appel la fonction resetForm
+// Fonction pour fermer la modale,
+// elle fait passer le display de la modale à none et appel la fonction resetForm
 function closeModal() {
     // Ferme la modal
     modalbg.style.display = "none";
@@ -65,7 +65,7 @@ function SubmitForm(event) {
     if (submitBouton.value === "Fermer") { // si la submitBouton.value est égale à "Fermer" elle ferme la modale et reset le formulaire
         closeModal();
         resetForm();
-    } else { // sinon elle lance la fonction validate (qui verifies les champs du formulaire)
+    } else { // sinon, elle lance la fonction validate (qui verifies les champs du formulaire)
         if (validate()) {
             ValidationModal();
         }
@@ -126,7 +126,7 @@ function validate() {
     }
     // Si le champ de l'e-mail ne passe pas la validation (longueur inférieure à 2 ou ne correspondant pas à la regex),
     // alors ajoute l'identifiant du champ de l'e-mail au tableau des erreurs.
-    if (!validateField(email.value, "Veuillez entrer un e-mail valide.", email, emailRegex)) {
+    if (!validateField(email.value,2, "Veuillez entrer un e-mail valide.", email, emailRegex)) {
         errors.push("email");
     }
     // Si le champ de la date de naissance ne passe pas la validation (ne correspondant pas à la fonction validateBirthdate),
@@ -142,7 +142,7 @@ function validate() {
     // Si le champ du radio bouton ne passe pas la validation (ne correspondant pas à la fonction validateLocation),
     // alors ajoute l'identifiant du champ du radio bouton au tableau des erreurs.
     if (!validateLocation()) {
-		errors.push("location1");
+        errors.push("location1");
     }
     // Si le champ des conditions d'utilisation ne passe pas la validation (ne correspondant pas à la fonction validateCheckbox),
     // alors ajoute l'identifiant du champ des conditions d'utilisation au tableau des erreurs.
@@ -205,10 +205,11 @@ function validateQuantity() {
 // Fonction pour valider le radio bouton
 function validateLocation() {
     let AllLocations = document.querySelectorAll('input[name="location"]');
+    AllLocations = Array.from(AllLocations); // Convertir en tableau
     // Vérifie si au moins un radio bouton est coché depuis le tableau AllLocations
-    let OneLocation =  AllLocations.filter(location => location.checked).length > 0;
+    let OneLocation = AllLocations.filter(location => location.checked).length > 0;
     // Si aucun radio bouton n'est coché, affiche un message d'erreur
-    if (OneLocation === false) {
+    if (!OneLocation) {
         locationsErreur.closest("div").setAttribute("data-error-visible", true);
         locationsErreur.closest("div").setAttribute("data-error", "Vous devez choisir une option");
         return false;
@@ -217,6 +218,7 @@ function validateLocation() {
         return true;
     }
 }
+
 
 // Fonction pour valider les conditions d'utilisation
 function validateCheckbox() {
